@@ -14,7 +14,6 @@ const useSignup = () => {
         setLoading(true);
 
         try {
-            console.log("Fetching data...");
             const res = await fetch('/api/auth/signup', {
                 method: "POST",
                 headers: {
@@ -23,12 +22,6 @@ const useSignup = () => {
                 },
                 body: JSON.stringify({ fullname, username, password, confirmPassword, gender }),
             });
-
-            if (!res.ok) {
-                throw new Error(`HTTP error! Status: ${res.status}`)
-            }
-
-            console.log("Data fetched successfully.");
 
             const data = await res.json();
             if (data.error) {
@@ -39,7 +32,6 @@ const useSignup = () => {
             setAuthUser(data);
 
         } catch (error) {
-            console.error("Error:", error.message);
             toast.error(error.message);
         } finally {
             setLoading(false);
