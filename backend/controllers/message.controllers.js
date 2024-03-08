@@ -1,5 +1,5 @@
-import Conversation from "../models/conversation.model.js"
-import Message from "../models/message.model.js"
+import Conversation from "../models/conversation.model.js";
+import Message from "../models/message.model.js";
 
 export const sendMessage = async (req, res) => {
     try {
@@ -12,7 +12,7 @@ export const sendMessage = async (req, res) => {
         });
 
         if (!conversation) {
-            conversation = await conversation.create({
+            conversation = await Conversation.create({
                 participants: [senderId, receiverId],
             });
         }
@@ -23,22 +23,18 @@ export const sendMessage = async (req, res) => {
             message,
         });
 
-        if (newMessage) {
-            conversation.messages.push(newMessage._id);
-        }
+        conversation.messages.push(newMessage._id);
 
-        //SOCKET IO FUNCTIONALITY WILL GO HERE
-
-        //this will run in parallel
         await Promise.all([conversation.save(), newMessage.save()]);
 
-        return res.status(201).json(newMessage);
+        // SOCKET IO FUNCTIONALITY WILL GO HERE
 
+        return res.status(201).json(newMessage);
     } catch (error) {
         console.log("Error in sendMessage controller: ", error.message);
         res.status(500).json({ error: "Internal server error" });
     }
-}
+};
 
 export const getMessages = async (req, res) => {
     try {
@@ -47,16 +43,17 @@ export const getMessages = async (req, res) => {
 
         const conversation = await Conversation.findOne({
             participants: { $all: [senderId, userToChatId] },
-        }).populate("messages"); // NOT REFERENCE BUT ACTUAL MESSAGES
+        }).populate("messages");
+
+        console.log(conversation);
 
         if (!conversation) return res.status(200).json([]);
 
         const messages = conversation.messages;
 
         res.status(200).json(messages);
-
     } catch (error) {
-        console.log("Error in sendMessage controller: ", error.message);
+        console.log("Error in getMessages controller: ", error.message);
         res.status(500).json({ error: "Internal server error" });
     }
-}
+};
