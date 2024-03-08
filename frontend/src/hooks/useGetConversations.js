@@ -7,13 +7,9 @@ const useGetConversations = () => {
 
     useEffect(() => {
         const getConversations = async () => {
-
             const getUserToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWUxY2ZhZjQwOGIwZjFiZDJlMmE2MDQiLCJpYXQiOjE3MDkyOTc1ODMsImV4cCI6MTcxOTY2NTU4M30.Jw5_CRDsTk9hHA9whD7joidLGHl5PumzrsYPYMwcnSE";
-
-            // setLoading(true);
-
+            setLoading(true);
             try {
-                setLoading(true);
                 const res = await fetch('/api/users', {
                     method: "GET",
                     headers: {
@@ -28,17 +24,12 @@ const useGetConversations = () => {
                     throw new Error(data.error);
                 }
 
-                if (data) {
-                    setConversations(data);
-                }
-                setLoading(false);
-
+                setConversations(data);
             } catch (error) {
                 toast.error(error.message);
-            } 
-            // finally {
-            //     setLoading(false);
-            // }
+            } finally {
+                setLoading(false);
+            }
         }
         getConversations();
     }, []);
