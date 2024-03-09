@@ -9,17 +9,17 @@ const userLogin = () => {
     const login = async (username, password) => {
 
         const success = handleInputError({ username, password });
+        const loginToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWUxY2ZhZjQwOGIwZjFiZDJlMmE2MDQiLCJpYXQiOjE3MDkyOTc1ODMsImV4cCI6MTcxOTY2NTU4M30.Jw5_CRDsTk9hHA9whD7joidLGHl5PumzrsYPYMwcnSE";
         if (!success) return;
 
         setLoading(true)
 
         try {
-            console.log("Fetching Data.....");
             const res = await fetch("/api/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    //"Authorization": `Bearer ${signupToken}`
+                    "Authorization": `Bearer ${loginToken}`
                 },
                 body: JSON.stringify({ username, password }),
             });
@@ -27,8 +27,6 @@ const userLogin = () => {
             if (!res.ok) {
                 throw new Error(`HTTP error! Status: ${res.status}`)
             }
-
-            console.log("Data fetched successfully.....");
 
             const data = await res.json();
             if (data.error) {
