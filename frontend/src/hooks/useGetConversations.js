@@ -7,14 +7,14 @@ const useGetConversations = () => {
 
     useEffect(() => {
         const getConversations = async () => {
-            const getUserToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWU4MTA4NGE4OTVjMjljZGIwMWYyYmIiLCJpYXQiOjE3MTAyNjExOTcsImV4cCI6MTcyMDYyOTE5N30._cyYdUTtZFCjtQYxs3Une1b8bNF2rD8lPTSWjONl5_k";
+            const storedToken = document.cookie.split("=")[1];
             setLoading(true);
             try {
                 const res = await fetch('/api/users', {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer ${getUserToken}`
+                        "Authorization": `Bearer ${storedToken}`
                     },
                 });
 

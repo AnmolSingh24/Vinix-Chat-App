@@ -9,7 +9,7 @@ const userLogin = () => {
     const login = async (username, password) => {
 
         const success = handleInputError({ username, password });
-        const loginToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWU4MTA4NGE4OTVjMjljZGIwMWYyYmIiLCJpYXQiOjE3MTAyNjExOTcsImV4cCI6MTcyMDYyOTE5N30._cyYdUTtZFCjtQYxs3Une1b8bNF2rD8lPTSWjONl5_k";
+        const storedToken = document.cookie.split("=")[1];
         if (!success) return;
 
         setLoading(true)
@@ -19,7 +19,7 @@ const userLogin = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${loginToken}`
+                    "Authorization": `Bearer ${storedToken}`
                 },
                 body: JSON.stringify({ username, password }),
             });

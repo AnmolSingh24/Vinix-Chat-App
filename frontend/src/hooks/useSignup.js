@@ -8,7 +8,6 @@ const useSignup = () => {
 
     const signup = async ({ fullname, username, password, confirmPassword, gender }) => {
         const success = handleInputError({ fullname, username, password, confirmPassword, gender });
-        const signupToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWUxY2ZhZjQwOGIwZjFiZDJlMmE2MDQiLCJpYXQiOjE3MDkyOTc1ODMsImV4cCI6MTcxOTY2NTU4M30.Jw5_CRDsTk9hHA9whD7joidLGHl5PumzrsYPYMwcnSE";
         if (!success) return;
 
         setLoading(true);
@@ -17,7 +16,6 @@ const useSignup = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${signupToken}`
                 },
                 body: JSON.stringify({ fullname, username, password, confirmPassword, gender }),
             });
