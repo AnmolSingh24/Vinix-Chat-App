@@ -3,12 +3,11 @@ import toast from 'react-hot-toast';
 
 const useGetConversations = () => {
     const [loading, setLoading] = useState(false);
-    //const [selectedConversation, setSelectedConversation] = useState(null);
     const [conversations, setConversations] = useState([]);
 
     useEffect(() => {
-        const getUserToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWUxY2ZhZjQwOGIwZjFiZDJlMmE2MDQiLCJpYXQiOjE3MDkyOTc1ODMsImV4cCI6MTcxOTY2NTU4M30.Jw5_CRDsTk9hHA9whD7joidLGHl5PumzrsYPYMwcnSE";
         const getConversations = async () => {
+            const getUserToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWU4MTA4NGE4OTVjMjljZGIwMWYyYmIiLCJpYXQiOjE3MTAyNjExOTcsImV4cCI6MTcyMDYyOTE5N30._cyYdUTtZFCjtQYxs3Une1b8bNF2rD8lPTSWjONl5_k";
             setLoading(true);
             try {
                 const res = await fetch('/api/users', {
@@ -19,10 +18,10 @@ const useGetConversations = () => {
                     },
                 });
 
-                if (!res.ok) {
-                    throw new Error('Failed to fetch conversations');
-                }
                 const data = await res.json();
+                if (data.error) {
+                    throw new Error(data.error);
+                }
                 setConversations(data);
             } catch (error) {
                 toast.error(error.message);
@@ -32,8 +31,7 @@ const useGetConversations = () => {
         }
         getConversations();
     }, []);
-    return { conversations, loading };
-    //return { selectedConversation, setSelectedConversation};
+    return { loading, conversations };
 }
 
 export default useGetConversations;
