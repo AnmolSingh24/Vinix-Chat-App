@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useGetConversations from '../../hooks/useGetConversations';
+import useGetUsers from '../../hooks/useGetUsers';
 import Messages from './Messages'
 import MessagesInput from './MessagesInput'
 import { TiMessages } from "react-icons/ti";
@@ -9,7 +9,7 @@ import { useAuthContext } from '../../context/AuthContext';
 
 const MessageContainer = () => {
 
-    const { selectedConversation, setSelectedConversation } = useGetConversations();
+    const { selectedConversation, setSelectedConversation } = useGetUsers();
     //console.log("No Chats Selected: ", selectedConversation);
 
     useEffect(() => {
