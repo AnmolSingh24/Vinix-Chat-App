@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { MdOutlineCameraAlt } from "react-icons/md";
 import { TbSend } from "react-icons/tb";
 import { TiMicrophoneOutline } from "react-icons/ti";
 import useSendMessage from '../../hooks/useSendMessage';
@@ -19,6 +20,11 @@ const MessagesInput = () => {
   return (
     <form className='px-4 my-3' onSubmit={handleSubmit}>
       <div className='w-96 relative flex items-center justify-between'>
+
+        <button type='submit' className='left-1 bg-emerald-500 p-3 mr-1 rounded-full'>
+          {loading ? <div className='loading loading-spinner'></div> : <MdOutlineCameraAlt className='w-5 h-5 text-black' />}
+        </button>
+
         <input type="text" className='border text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 text-black'
           placeholder='Message here...'
           value={message}
