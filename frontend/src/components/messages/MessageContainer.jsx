@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useGetConversations from '../../hooks/useGetConversations';
+import useConversations from '../../zustand/useConversation.js';
 import Messages from './Messages'
 import MessagesInput from './MessagesInput'
 import { TiMessages } from "react-icons/ti";
@@ -9,7 +9,7 @@ import { useAuthContext } from '../../context/AuthContext';
 
 const MessageContainer = () => {
 
-    const { selectedConversation, setSelectedConversation } = useGetConversations();
+    const { selectedConversation, setSelectedConversation } = useConversations();
     console.log("No Chats Selected: ", selectedConversation);
 
     useEffect(() => {
@@ -20,22 +20,22 @@ const MessageContainer = () => {
 
     return (
         <div className='md:min-w-[450px] flex flex-col'>
-            {/* {!selectedConversation ? (
+            {!selectedConversation ? (
                 <NoChatSelected />
-            ) : ( */}
+            ) : (
                 <>
                     {/* <Header/> */}
-                    <div className='flex items-center gap-40 bg-emerald-500 px-4 py-3.5'>
+                    <div className='flex items-start justify-between bg-emerald-500 px-4 py-3.5'>
                         <span className='label-text text-gray-100 font-semibold'>To : </span>
                         <span className='text-gray-200 font-bold'>
-                            {/* {selectedConversation.fullname} */}
+                            {selectedConversation.fullname}
                         </span>
 
                         <div className='flex justify-end gap-6 mr-6'>
                             <button>
                                 <FaVideo className='w-5 h-5 text-white' />
                             </button>
-                            <div>
+                            <div className='pt-1'>
                                 <button>
                                     <IoMdCall className='w-5 h-5 text-white' />
                                 </button>
@@ -45,7 +45,7 @@ const MessageContainer = () => {
                     <Messages />
                     <MessagesInput />
                 </>
-            {/* )} */}
+            )}
         </div>
     );
 }
