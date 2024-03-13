@@ -23,9 +23,9 @@ const MessageContainer = () => {
             ) : (
                 <>
                     {/* <Header/> */}
-                    <div className='flex items-start justify-between bg-emerald-500 px-4 py-3.5'>
+                    <div className='flex items-start justify-between bg-emerald-600 px-4 py-3.5'>
                         <span className='label-text text-gray-100 font-semibold'>To : </span>
-                        <span className='text-gray-200 font-bold'>
+                        <span className='text-gray-100 font-bold'>
                             {selectedConversation.fullname}
                         </span>
 

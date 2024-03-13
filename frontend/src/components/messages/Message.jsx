@@ -9,7 +9,7 @@ const Message = ({ message }) => {
     const formattedTime = extractTime(message.createdAt);
     const chatClassName = fromMe ? 'chat-end' : 'chat-start';
     const profilePic = fromMe ? authUser.profilePic : selectedConversation?.profilePic;
-    const bgColor = fromMe ? 'bg-emerald-600' : 'bg-emerald-400';
+    const bgColor = fromMe ? 'bg-emerald-600' : 'bg-emerald-800';
 
     return (
         <div className={`chat ${chatClassName}`}>
@@ -20,7 +20,7 @@ const Message = ({ message }) => {
             </div>
 
             <div className={`chat-bubble text-white ${bgColor} pb-2`}>{message.message}</div>
-            <div className='chat-footer opacity-50 text-xs flex gap-1 items-center'>{formattedTime}</div>
+            <div className='chat-footer opacity-50 text-xs flex gap-1 items-center text-white'>{formattedTime}</div>
         </div>
     )
 }
