@@ -20,15 +20,15 @@ const MessageContainer = () => {
 
     return (
         <div className='md:min-w-[450px] flex flex-col'>
-            {!selectedConversation ? (
+            {/* {!selectedConversation ? (
                 <NoChatSelected />
-            ) : (
+            ) : ( */}
                 <>
                     {/* <Header/> */}
                     <div className='flex items-center gap-40 bg-emerald-500 px-4 py-3.5'>
                         <span className='label-text text-gray-100 font-semibold'>To : </span>
                         <span className='text-gray-200 font-bold'>
-                            {selectedConversation.fullname}
+                            {/* {selectedConversation.fullname} */}
                         </span>
 
                         <div className='flex justify-end gap-6 mr-6'>
@@ -45,7 +45,7 @@ const MessageContainer = () => {
                     <Messages />
                     <MessagesInput />
                 </>
-            )}
+            {/* )} */}
         </div>
     );
 }
