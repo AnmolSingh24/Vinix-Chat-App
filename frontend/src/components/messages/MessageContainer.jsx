@@ -10,11 +10,10 @@ import { useAuthContext } from '../../context/AuthContext';
 const MessageContainer = () => {
 
     const { selectedConversation, setSelectedConversation } = useConversations();
-    console.log("No Chats Selected: ", selectedConversation);
 
     useEffect(() => {
         //cleanup function (unmounts)
-        //return () => setSelectedConversation(null);
+        return () => setSelectedConversation(null);
     }, [setSelectedConversation]);
 
 
