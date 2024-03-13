@@ -2,13 +2,13 @@ import { useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import { SiChatbot } from "react-icons/si";
 import useConversation from "../../zustand/useConversation";
-import useGetUsers from "../../hooks/useGetUsers";
+import useGetConversations from "../../hooks/useGetConversations";
 import toast from "react-hot-toast";
 
 const SearchInput = () => {
   const { search, setSearch } = useState("");
   const { setSelectedConversation } = useConversation();
-  const { conversations } = useGetUsers();
+  const { conversations } = useGetConversations();
 
   const handleSubmit = (e) => {
     e.preventDefault();

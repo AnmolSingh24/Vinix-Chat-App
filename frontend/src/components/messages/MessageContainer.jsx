@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useGetUsers from '../../hooks/useGetUsers';
+import useGetConversations from '../../hooks/useGetConversations';
 import Messages from './Messages'
 import MessagesInput from './MessagesInput'
 import { TiMessages } from "react-icons/ti";
@@ -9,8 +9,8 @@ import { useAuthContext } from '../../context/AuthContext';
 
 const MessageContainer = () => {
 
-    const { selectedConversation, setSelectedConversation } = useGetUsers();
-    //console.log("No Chats Selected: ", selectedConversation);
+    const { selectedConversation, setSelectedConversation } = useGetConversations();
+    console.log("No Chats Selected: ", selectedConversation);
 
     useEffect(() => {
         //cleanup function (unmounts)
