@@ -20,7 +20,7 @@ const MessagesInput = () => {
     <form className='px-4 my-3' onSubmit={handleSubmit}>
       <div className='w-96 relative flex items-center justify-between'>
 
-        <button type='submit' className='left-1 bg-emerald-500 p-3 mr-1 rounded-full'>
+        <button type='submit' className='bg-emerald-500 p-3 mr-1 rounded-full'>
           {loading ? <div className='loading loading-spinner'></div> : <MdOutlineCameraAlt className='w-5 h-5 text-black' />}
         </button>
 
