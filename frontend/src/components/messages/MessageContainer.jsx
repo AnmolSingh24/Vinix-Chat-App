@@ -10,7 +10,6 @@ import { useAuthContext } from '../../context/AuthContext';
 const MessageContainer = () => {
 
     const { selectedConversation, setSelectedConversation } = useConversations();
-
     useEffect(() => {
         //cleanup function (unmounts)
         return () => setSelectedConversation(null);
