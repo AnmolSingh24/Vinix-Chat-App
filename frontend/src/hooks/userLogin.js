@@ -24,10 +24,6 @@ const userLogin = () => {
                 body: JSON.stringify({ username, password }),
             });
 
-            if (!res.ok) {
-                throw new Error(`HTTP error! Status: ${res.status}`)
-            }
-
             const data = await res.json();
             if (data.error) {
                 throw new Error(data.error);
