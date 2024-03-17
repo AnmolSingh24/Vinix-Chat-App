@@ -15,6 +15,11 @@ const messageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    userSendFile: {
+        type: String,
+        size: String,
+        default: ""
+    }
 }, {timestamps: true});
 
 const Message = mongoose.model("Message", messageSchema);

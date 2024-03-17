@@ -6,11 +6,14 @@ import messageRoutes from "./routes/message.routes.js"
 import userRoutes from "./routes/user.routes.js"
 import connectToMongoDB from "./db/connectToMongoDB.js";
 import { app, server } from "./socket/socket.js";
+import bodyParser from "body-parser"
 
 const PORT = process.env.PORT || 5000;
 dotenv.config();
 
 app.use(express.json()); //to parse the incoming requests with JSON payloads (from req.body)
+
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);

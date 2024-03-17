@@ -7,9 +7,24 @@ const useSendMessage = () => {
     const [loading, setLoading] = useState(false);
     const { messages, setMessages, selectedConversation } = useConversations();
 
-    const sendMessage = async (message) => {
+    function getBase64(file) {
+        if (!file) return;
+        return new Promise(function (resolve, reject) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                resolve(reader.result); // Resolve the Promise with the result
+            };
+            reader.onerror = function (error) {
+                reject(error); // Reject the Promise with the error
+            };
+        });
+    }
+
+    const sendMessage = async (message, file) => {
         const sendMessageToken = document.cookie.split("=")[1];
         setLoading(true);
+        const userSendFile = await getBase64(file);
         try {
             const res = await fetch(`/api/messages/send/${selectedConversation._id}`, {
                 method: "POST",
@@ -17,7 +32,7 @@ const useSendMessage = () => {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${sendMessageToken}`
                 },
-                body: JSON.stringify({ message }),
+                body: JSON.stringify({ message, userSendFile }),
             });
 
             const data = await res.json();
