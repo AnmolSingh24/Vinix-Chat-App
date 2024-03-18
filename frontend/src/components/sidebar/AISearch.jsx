@@ -3,7 +3,7 @@ import { SiChatbot } from "react-icons/si";
 
 export const AISearch = () => {
   const [messages, setMessages] = useState([
-    { content: "Hi there 👋\nHow can I help you today?", sender: "outgoing" }
+    { content: "Hi there 👋\nHow can I help you today?", sender: "incoming" }
   ]);
   const chatInputRef = useRef(null);
   const API_KEY = "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";
@@ -12,7 +12,7 @@ export const AISearch = () => {
     const userMessage = chatInputRef.current.value.trim();
     if (!userMessage) return;
 
-    const newMessages = [...messages, { content: userMessage, sender: "outgoing" }];
+    const newMessages = [...messages, { content: userMessage, sender: "incoming" }];
     setMessages(newMessages);
     chatInputRef.current.value = '';
 
@@ -39,10 +39,10 @@ export const AISearch = () => {
       .then(res => res.json())
       .then(data => {
         const response = data.choices[0].message.content.trim();
-        setMessages([...messages, { content: response, sender: "outgoing" }]);
+        setMessages([...messages, { content: response, sender: "incoming" }]);
       })
       .catch(() => {
-        setMessages([...messages, { content: "Oops! Something went wrong. Please try again.", sender: "outgoing" }]);
+        setMessages([...messages, { content: "Oops! Something went wrong. Please try again.", sender: "incoming" }]);
       });
   };
 
@@ -60,8 +60,8 @@ export const AISearch = () => {
         <ul className="chatbox overflow-y-auto max-h-96 p-6">
           {messages.map((message, index) => (
             <li key={index} className={`chat ${message.sender}`}>
-              {message.sender === "outgoing" && <span className="material-symbols-outlined w-8 h-8 flex items-center justify-center bg-emerald-600 rounded-md text-white mr-2">smart_toy</span>}
-              <p className={`p-2 rounded-2xl max-w-3/4 ${message.sender === "outgoing" ? "bg-gray-200 text-black" : "bg-emerald-600 text-white"}`}>{message.content}</p>
+              {message.sender === "incoming" && <span className="material-symbols-outlined w-8 h-8 flex items-center justify-center bg-emerald-600 rounded-md text-white mr-2">smart_toy</span>}
+              <p className={`p-2 rounded-2xl max-w-3/4 ${message.sender === "incoming" ? "bg-gray-200 text-black" : "bg-emerald-600 text-white"}`}>{message.content}</p>
             </li>
           ))}
         </ul>
