@@ -51,11 +51,11 @@ export const MessageFilePreview = ({ fileName, file }) => {
     return (
         <div className='bg-white p-1 rounded-lg'>
             <div className="bg-gray-300 text-black rounded-lg">
-                <img className='h-16 w-13' src={icon} alt={`${fileType} Icon`} />
-                <div className="flex gap-4 ml-auto">
-                    <p className='text-lg pl-4'>{fileName}</p>
-                    <a href={file}>
-                        <PiDownloadSimple className='w-6 h-6' />
+                <img className='h-12 w-12' src={icon} alt={`${fileType} Icon`} />
+                <div className="flex gap-2">
+                    <p className='text-sm pl-2 mb-1'>{fileName}</p>
+                    <a href={file} className='pr-2'>
+                        <PiDownloadSimple className='w-5 h-5' />
                     </a>
                 </div>
             </div>
