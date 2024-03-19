@@ -21,7 +21,7 @@ const MessagesInput = () => {
       if (file) {
         setMessage(file.name);
         if (file.type.startsWith('image/')) {
-          setFilePreview(URL.createObjectURL(file)); // Set file preview for image type only
+          setFilePreview(URL.createObjectURL(file));
         } else if (['application/pdf'].includes(file.type)) {
           setFilePreview('pdf');
         } else if (['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(file.type)) {
@@ -44,12 +44,12 @@ const MessagesInput = () => {
     e.preventDefault();
     if (!message && !selectedFile) return;
 
-    const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB (adjust as needed)
+    const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
     if (message || selectedFile) {
       await sendMessage(message, selectedFile);
       setMessage("");
-      setSelectedFile(null); // Reset selected file after sending
+      setSelectedFile(null);
     }
 
     if (selectedFile && selectedFile.size > MAX_FILE_SIZE) {
@@ -66,7 +66,6 @@ const MessagesInput = () => {
         </button>
 
         <input type="file" className="hidden" ref={fileInputRef} />
-
         <input type="text" className='border z-10 text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 text-black'
           placeholder='Message here...'
           value={message}
