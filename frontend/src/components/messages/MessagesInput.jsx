@@ -50,7 +50,6 @@ const MessagesInput = () => {
       await sendMessage(message, selectedFile);
       setMessage("");
       setSelectedFile(null); // Reset selected file after sending
-      setFilePreview(null); // Reset file preview after sending
     }
 
     if (selectedFile && selectedFile.size > MAX_FILE_SIZE) {
@@ -68,41 +67,13 @@ const MessagesInput = () => {
 
         <input type="file" className="hidden" ref={fileInputRef} />
 
-        {filePreview && (
-          <div className="w-96 h-96 mb-80 absolute bg-black bg-opacity-1 flex items-center justify-center">
-            <div className="flex items-center justify-center">
-              {filePreview === 'pdf' && (
-                <a href={URL.createObjectURL(selectedFile)} download={selectedFile.name}>
-                  <img src="../../src/assets/images/pdf-logo.png" alt="PDF Icon" className="w-10 h-10 z-10" />
-                  {selectedFile.name}
-                </a>
-              )}
-              {filePreview === 'word' && (
-                <a className='text-white' href={URL.createObjectURL(selectedFile)} download={selectedFile.name}>
-                  <img src="../../src/assets/images/word-logo.jpg" alt="Word Icon" className="w-10 h-10" />
-                  {selectedFile.name}
-                </a>
-              )}
-              {filePreview === 'txt' && (
-                <a className='text-white' href={URL.createObjectURL(selectedFile)} download={selectedFile.name}>
-                  <img src="../../src/assets/images/txt-logo.png" alt="Text Icon" className="w-10 h-10" />
-                  {selectedFile.name}
-                </a>
-              )}
-              {filePreview.startsWith('http') && (
-                <img src={filePreview} alt="File Preview" className="w-10 h-10 rounded-full" />
-              )}
-            </div>
-          </div>
-        )}
-
         <input type="text" className='border z-10 text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 text-black'
           placeholder='Message here...'
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
 
-        <button type='submit' className='z-10 absolute end-0 items-center p-2 rounded-full bg-emerald-500 mt-0.5 mr-2'>
+        <button type='submit' className='z-10 absolute end-0 items-center p-2 rounded-full mt-0.5 mr-2'>
           {fileLoading ? <div className='loading loading-spinner'></div> : <TbSend className='w-5 h-5 text-black' />}
         </button>
 
