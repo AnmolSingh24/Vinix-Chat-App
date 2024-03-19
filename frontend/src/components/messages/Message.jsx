@@ -2,8 +2,7 @@ import React from 'react';
 import { useAuthContext } from "../../context/AuthContext";
 import { extractTime } from "../../utils/extractTime";
 import useConversations from '../../zustand/useConversation.js';
-import { MessageFilePreview } from '../filePreview/MessageFilePreview.jsx'; // Import MessageFilePreview component
-
+import { MessageFilePreview } from '../filePreview/MessageFilePreview.jsx';
 const Message = ({ message }) => {
     const { authUser } = useAuthContext();
     const { selectedConversation } = useConversations();
@@ -13,7 +12,6 @@ const Message = ({ message }) => {
     const profilePicture = fromMe ? authUser.profilePicture : selectedConversation?.profilePicture;
     const bgColor = fromMe ? 'bg-emerald-600' : 'bg-emerald-800';
 
-    // Check if the message is a file
     const isFile = message.userSendFile.length !== 0;
 
     return (
@@ -31,7 +29,7 @@ const Message = ({ message }) => {
                         fileName={message.message}
                         file={message.userSendFile}
                     />
-                ) : ( // Otherwise, render regular message content
+                ) : (
                     message.message
                 )}
                 <div className='chat-footer opacity-70 text-xs flex gap-1 items-end text-white pb-1'>{formattedTime}</div>
