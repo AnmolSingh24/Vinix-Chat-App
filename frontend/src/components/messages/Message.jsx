@@ -33,7 +33,7 @@ const Message = ({ message }) => {
                 ) : (
                     message.message
                 )}
-                <div className='chat-footer opacity-70 text-xs flex gap-1 items-end text-white pb-1'>{formattedTime}</div>
+                <div className='chat-footer opacity-70 text-xs flex gap-1 items-end text-white'>{formattedTime}</div>
             </div>
         </div>
     );
