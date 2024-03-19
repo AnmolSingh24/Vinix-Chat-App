@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
-//import { AISearch } from "../sidebar/AISearch";
+import { AISearch } from "../sidebar/AISearch";
 import useConversation from "../../zustand/useConversation";
 import useGetConversations from "../../hooks/useGetConversations";
 import toast from "react-hot-toast";
@@ -34,7 +34,7 @@ const SearchInput = () => {
         <IoSearchSharp className='w-6 h-6 outline-none' />
       </button>
 
-      {/* <AISearch/> */}
+      <AISearch/>
     </form>
   )
 }
