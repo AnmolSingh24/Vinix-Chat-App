@@ -4,7 +4,6 @@ import { extractTime } from "../../utils/extractTime";
 import useConversations from '../../zustand/useConversation.js';
 import { MessageFilePreview } from '../filePreview/MessageFilePreview.jsx'; // Import MessageFilePreview component
 
-
 const Message = ({ message }) => {
     const { authUser } = useAuthContext();
     const { selectedConversation } = useConversations();
