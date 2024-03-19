@@ -31,9 +31,7 @@ const Message = ({ message }) => {
                         file={message.userSendFile}
                     />
                 ) : (
-                    <div className="w-full">
-                        {message.message}
-                    </div>
+                    message.message
                 )}
                 <div className='chat-footer opacity-70 text-xs flex gap-1 items-end text-white pb-1'>{formattedTime}</div>
             </div>
