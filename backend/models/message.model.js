@@ -13,12 +13,14 @@ const messageSchema = new mongoose.Schema({
     },
     message: {
         type: String,
-        required: true
     },
     userSendFile: {
         type: String,
         size: String,
-        default: ""
+    },
+    userSendVoiceNotes: {
+        type: String,
+        size: String,
     }
 }, {timestamps: true});
 
