@@ -13,17 +13,18 @@ const useSendMessage = () => {
             var reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function () {
-                resolve(reader.result); // Resolve the Promise with the result
+                resolve(reader.result);
             };
             reader.onerror = function (error) {
-                reject(error); // Reject the Promise with the error
+                reject(error);
             };
         });
     }
 
-    const sendMessage = async (message, file) => {
+    const sendMessage = async (message, file, audio) => {
         const sendMessageToken = document.cookie.split("=")[1];
         setLoading(true);
+        const sendAudioFile = await getBase64(audio);
         const userSendFile = await getBase64(file);
         try {
             const res = await fetch(`/api/messages/send/${selectedConversation._id}`, {
@@ -32,7 +33,7 @@ const useSendMessage = () => {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${sendMessageToken}`
                 },
-                body: JSON.stringify({ message, userSendFile }),
+                body: JSON.stringify({ message, userSendFile, sendAudioFile }),
             });
 
             const data = await res.json();
