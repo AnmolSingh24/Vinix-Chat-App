@@ -12,7 +12,6 @@ const useSendFiles = () => {
         try {
             const formData = new FormData();
             formData.append("file", file);
-            formData.append("message", "")
             const res = await fetch(`/api/messages/send/${selectedConversation._id}`, {
                 method: "POST",
                 headers: {
