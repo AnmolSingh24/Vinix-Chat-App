@@ -66,13 +66,13 @@ const AISearch = () => {
       </button>
 
       {showChatbot && (
-        <div className="chatbot -top-5 left-[4rem] absolute w-[29rem] h-[35rem] bg-white rounded-lg overflow-hidden transform scale-100 transition-all duration-100 ease-in-out">
+        <div className="chatbot -top-6 left-[4rem] absolute w-[29rem] h-[35rem] bg-white rounded-lg overflow-hidden transform scale-100 transition-all duration-100 ease-in-out">
           <header className="bg-emerald-600 text-white py-4 text-center relative">
-            <h2 className="text-lg font-semibold">VINIX AI </h2>
+            <h2 className="text-lg font-semibold pt-0.5">VINIX AI </h2>
             <span className="close-btn material-symbols-outlined absolute top-1/2 right-8 transform -translate-y-1/2 cursor-pointer" onClick={() => setShowChatbot(false)}>x</span>
           </header>
 
-          <ul className="h-[28rem] p-6 overflow-auto">
+          <ul className="h-[27.8rem] p-6 overflow-auto">
             {messages.map((message, index) => (
               <li key={index} className={`chat ${message.sender}`}>
                 {message.sender === "incoming" && <span className="material-symbols-outlined w-8 h-8 flex items-center justify-center bg-emerald-600 rounded-md text-white mr-2"><RiRobot2Line /></span>}
@@ -87,7 +87,7 @@ const AISearch = () => {
               placeholder="Enter a message..."
               spellCheck="true"
             />
-            <span id="send-btn" className="material-symbols-rounded text-emerald-600 text-xl flex items-center justify-center cursor-pointer mr-6" onClick={handleChat}>send</span>
+            <span id="send-btn" className="bg-emerald-600 text-white text-lg flex items-center justify-center cursor-pointer py-1.5 px-3 rounded-full mt-1 mr-6" onClick={handleChat}>Send</span>
           </div>
         </div>
       )}
