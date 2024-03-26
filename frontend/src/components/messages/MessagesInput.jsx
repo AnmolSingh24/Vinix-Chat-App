@@ -34,6 +34,8 @@ const MessagesInput = () => {
         setMessage(file.name);
         if (file.type.startsWith('image/')) {
           setFilePreview(URL.createObjectURL(file));
+          // Automatically close showOptions when image is previewed
+          setshowOptions(false);
         } else if (['application/pdf'].includes(file.type)) {
           setFilePreview('pdf');
         } else if (['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(file.type)) {
@@ -95,6 +97,8 @@ const MessagesInput = () => {
       const imageDataUrl = canvas.toDataURL('image/png');
       setFilePreview(imageDataUrl);
       closeCameraModal();
+      // Automatically close showOptions when image is captured
+      setshowOptions(false);
     }
   };
 
