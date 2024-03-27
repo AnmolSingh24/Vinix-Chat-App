@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { useState, useRef } from 'react';
-import { SiChatbot } from "react-icons/si";
+import { RiChatSmile3Line } from "react-icons/ri";
 import { RiRobot2Line } from "react-icons/ri";
 
 const AISearch = () => {
@@ -49,7 +49,7 @@ const AISearch = () => {
     <div className="relative z-10">
 
       <button type='submit' className="text-black p-1.5 flex items-center justify-center gap-2" onClick={() => setShowChatbot(!showChatbot)}>
-        <SiChatbot className="w-6 h-6 text-black  ml-1" />
+        <RiChatSmile3Line className="w-6 h-6 text-black  ml-1" />
         Vinix Chatbot
       </button>
 
