@@ -32,7 +32,7 @@ const AISearch = () => {
 
     const genAI = new GoogleGenerativeAI(API_KEY);
     if (!userMessage || userMessage.length === 0) return;
-    
+
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
       const res = await model.generateContent(userMessage);
@@ -47,12 +47,14 @@ const AISearch = () => {
 
   return (
     <div className="relative z-10">
-      <button type='submit' className='btn btn-circle border-none bg-emerald-500 hover:bg-emerald-600 text-white' onClick={() => setShowChatbot(!showChatbot)}>
-        <SiChatbot className="chatbot-toggler h-6 w-6 flex items-center justify-center rounded-fullcursor-pointer" />
+
+      <button type='submit' className="text-black p-1.5 flex items-center justify-center gap-2" onClick={() => setShowChatbot(!showChatbot)}>
+        <SiChatbot className="w-6 h-6 text-black  ml-1" />
+        Vinix Chatbot
       </button>
 
       {showChatbot && (
-        <div className="chatbot -top-6 left-[4rem] absolute w-[29rem] h-[35rem] bg-white rounded-lg overflow-hidden transform scale-100 transition-all duration-100 ease-in-out">
+        <div className="chatbot -top-28 left-[11rem] absolute w-[29rem] h-[35rem] bg-white rounded-lg overflow-hidden transform scale-100 transition-all duration-100 ease-in-out">
           <header className="bg-emerald-600 text-white py-4 text-center relative">
             <h2 className="text-lg font-semibold pt-0.5">VINIX AI </h2>
             <span className="close-btn material-symbols-outlined absolute top-1/2 right-8 transform -translate-y-1/2 cursor-pointer" onClick={() => setShowChatbot(false)}>x</span>
