@@ -3,8 +3,8 @@ import useConversations from '../../zustand/useConversation.js';
 import Messages from './Messages'
 import MessagesInput from './MessagesInput'
 import { TiMessages } from "react-icons/ti";
-import { FaVideo } from "react-icons/fa";
-import { IoMdCall } from "react-icons/io";
+// import { FaVideo } from "react-icons/fa";
+// import { IoMdCall } from "react-icons/io";
 import { useAuthContext } from '../../context/AuthContext';
 
 const MessageContainer = () => {
@@ -29,14 +29,14 @@ const MessageContainer = () => {
               <span className='text-gray-100 font-bold'>{selectedConversation.fullname}</span>
             </div>
 
-            <div className='flex items-center gap-6'>
+            {/* <div className='flex items-center gap-6'>
               <button>
                 <FaVideo className='w-5 h-5 text-white' />
               </button>
               <button>
                 <IoMdCall className='w-5 h-5 text-white' />
               </button>
-            </div>
+            </div> */}
           </div>
 
           <Messages />
