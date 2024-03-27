@@ -4,7 +4,6 @@ import { SiChatbot } from "react-icons/si";
 import { RiRobot2Line } from "react-icons/ri";
 
 const AISearch = () => {
-
   const [messages, setMessages] = useState([
     { content: "Hi there, \nHow can I assist you today?", sender: "outgoing" }
   ]);
@@ -16,48 +15,35 @@ const AISearch = () => {
     const userMessage = chatInputRef.current.value.trim();
     if (!userMessage) return;
 
-    const newMessages = [...messages, { content: userMessage, sender: "outgoing" }];
-    chatInputRef.current.value = '';
-
-    setMessages(prevMessages => [
-      ...prevMessages,
-      { content: userMessage, sender: "incoming" }
-    ]);
+    addMessage({ content: userMessage, sender: "incoming" });
 
     setTimeout(() => {
-      setMessages(prevMessages => [
-        ...prevMessages,
-        { content: "Thinking...", sender: "outgoing" }
-      ]);
-      Api(userMessage);
-
+      addMessage({ content: "Thinking...", sender: "outgoing" });
+      processUserMessage(userMessage);
     }, 600);
   };
 
-  async function Api(userMessage) {
+  const addMessage = (message) => {
+    setMessages(prevMessages => [...prevMessages, message]);
+  };
+
+  const processUserMessage = async (userMessage) => {
     const API_KEY = 'AIzaSyBBWHq1VljK2JvAtvYyL-l_0OWzShowlEE';
 
     const genAI = new GoogleGenerativeAI(API_KEY);
     if (!userMessage || userMessage.length === 0) return;
+    
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
       const res = await model.generateContent(userMessage);
-
       const response = await res.response.text();
-      setMessages(prevMessages => [
-        ...prevMessages,
-        { content: response, sender: "outgoing" }
-      ]);
-
+      console.log(response);
+      addMessage({ content: response, sender: "outgoing" });
     } catch (error) {
       console.error("An error occurred:", error);
-      setMessages(prevMessages => [
-        ...prevMessages.slice(0, -1),
-        { content: "Oops! Something went wrong. Please try again.", sender: "outgoing" }
-      ]);
+      addMessage({ content: "Oops! Something went wrong. Please try again.", sender: "outgoing" });
     }
-  }
+  };
 
   return (
     <div className="relative z-10">
