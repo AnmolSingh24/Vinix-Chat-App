@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { HiDotsVertical } from "react-icons/hi";
 import AISearch from "../AISearch"
-import CreateGroup from '../group/CreateGroup';
+import SelectUsers from '../group/SelectUsers';
 
 const DropDownOptions = () => {
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
@@ -20,7 +20,7 @@ const DropDownOptions = () => {
                 {isDropDownOpen && (
                     <div className="absolute top-full -left-28 bg-white z-10 mt-2 w-150 h-50 shadow-md">
                         {/* Create group */}
-                        <CreateGroup />
+                        <SelectUsers />
                         {/* AI Search */}
                         <AISearch />
                     </div>
