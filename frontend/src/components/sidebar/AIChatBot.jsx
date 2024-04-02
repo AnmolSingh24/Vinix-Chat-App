@@ -48,8 +48,8 @@ const AISearch = () => {
   return (
     <div className="relative z-10">
 
-      <button type='submit' className="text-black p-1.5 flex items-center justify-center gap-2" onClick={() => setShowChatbot(!showChatbot)}>
-        <RiChatSmile3Line className="w-6 h-6 text-black  ml-1" />
+      <button type='submit' className="text-black pt-3.5 w-40 flex items-center justify-center gap-2" onClick={() => setShowChatbot(!showChatbot)}>
+        <RiChatSmile3Line className="w-6 h-6 text-black" />
         Vinix Chatbot
       </button>
 
