@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import useGroup from '../zustand/useConversation';
+import { useGroup } from '../zustand/useConversation';
 
 const useGetGroups = () => {
     const [loading, setLoading] = useState(false);
@@ -11,7 +11,7 @@ const useGetGroups = () => {
             const getGroupToken = document.cookie.split("=")[1];
             setLoading(true);
             try {
-                const res = await fetch(`/api/groups/${selectedGroup._id}`, {
+                const res = await fetch(`/api/users/groups`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -20,6 +20,7 @@ const useGetGroups = () => {
                 });
 
                 const data = await res.json();
+                console.log({data});
                 if (data.error) throw new Error(data.error);
                 setGroups(data);
 
@@ -29,8 +30,8 @@ const useGetGroups = () => {
                 setLoading(false);
             }
         }
-        if (selectedConversation?._id) getGroups();
-    }, [selectedGroup?._id, setGroups]);
+        getGroups();
+    }, []);
     return { groups, loading };
 }
 
