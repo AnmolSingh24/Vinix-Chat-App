@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useConversations from '../../zustand/useConversation.js';
+import useConversation from '../../zustand/useConversation.js';
 import Messages from './Messages'
 import MessagesInput from './MessagesInput'
 import { TiMessages } from "react-icons/ti";
@@ -9,7 +9,7 @@ import { useAuthContext } from '../../context/AuthContext';
 
 const MessageContainer = () => {
 
-  const { selectedConversation, setSelectedConversation } = useConversations();
+  const { selectedConversation, setSelectedConversation } = useConversation();
 
   useEffect(() => {
     //cleanup function (unmounts)

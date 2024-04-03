@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuthContext } from "../../context/AuthContext";
 import { extractTime } from "../../utils/extractTime";
-import useConversations from '../../zustand/useConversation.js';
+import useConversation from '../../zustand/useConversation.js';
 import { MessageFilePreview } from '../filePreview/MessageFilePreview.jsx';
 
 const base64ToBlob = (base64str) => {
@@ -25,7 +25,7 @@ const base64ToBlob = (base64str) => {
 
 const Message = ({ message }) => {
     const { authUser } = useAuthContext();
-    const { selectedConversation } = useConversations();
+    const { selectedConversation } = useConversation();
     const fromMe = message.senderId === authUser._id;
     const formattedTime = extractTime(message.createdAt);
     const chatClassName = fromMe ? 'chat-end' : 'chat-start';

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import useConversations from "../zustand/useConversation.js";
+import useConversation from "../zustand/useConversation.js";
 import toast from "react-hot-toast";
 
 const useSendFiles = () => {
     const [loading, setLoading] = useState(false);
-    const { setMessages, selectedConversation } = useConversations();
+    const { setMessages, selectedConversation } = useConversation();
 
     const sendFiles = async (file) => {
         const sendFilesToken = document.cookie.split("=")[1];
