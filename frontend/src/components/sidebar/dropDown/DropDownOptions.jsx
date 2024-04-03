@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { HiDotsVertical } from "react-icons/hi";
-import AISearch from "../AISearch"
+import AIChatBot from "../AIChatBot"
 import SelectUsers from '../group/SelectUsers';
 
 const DropDownOptions = () => {
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-
+    
     const handleDropDown = () => {
         setIsDropDownOpen(!isDropDownOpen);
     };
@@ -18,11 +18,11 @@ const DropDownOptions = () => {
                 </button>
 
                 {isDropDownOpen && (
-                    <div className="absolute top-full -left-28 bg-white z-10 mt-2 w-150 h-50 shadow-md">
+                    <div className="absolute -left-28 bg-white z-10 mt-2 h-20 shadow-md rounded">
                         {/* Create group */}
                         <SelectUsers />
-                        {/* AI Search */}
-                        <AISearch />
+                        {/* AI ChatBot */}
+                        <AIChatBot />
                     </div>
                 )}
 
