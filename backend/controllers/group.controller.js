@@ -36,11 +36,10 @@ export const createGroup = async (req, res) => {
             const receiverSocketId = getReceiverSocketId(e);
             if (receiverSocketId) {
                 //io.to(socketId).emit() used to show events to specific clients
-                io.to(receiverSocketId).emit("newGroup", newGroup.groupname);
+                io.to(receiverSocketId).emit("newGroup", newGroup.groupName);
             }
         });
         return res.status(201).json({ message: 'Group created successfully', group: newGroup });
-        //return res.status(200).json(newGroup);
 
     } catch (error) {
         console.log("Error in createGroup controller: ", error.message);
