@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import useConversation from "../zustand/useConversation.js";
+import { useConversation } from "../zustand/useConversation.js";
 import toast from "react-hot-toast";
 
 const useGetFiles = () => {
@@ -22,7 +22,7 @@ const useGetFiles = () => {
         const data = await res.json();
         if (data.error) throw new Error(data.error);
         setMessages(data);
-        
+
       } catch (error) {
         toast.error(error.message)
       } finally {

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useConversation from '../../zustand/useConversation.js';
+import { useConversation } from '../../zustand/useConversation.js';
 import Messages from './Messages'
 import MessagesInput from './MessagesInput'
 import { TiMessages } from "react-icons/ti";

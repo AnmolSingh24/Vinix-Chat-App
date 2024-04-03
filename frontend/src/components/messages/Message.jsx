@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuthContext } from "../../context/AuthContext";
 import { extractTime } from "../../utils/extractTime";
-import useConversation from '../../zustand/useConversation.js';
+import { useConversation } from '../../zustand/useConversation.js';
 import { MessageFilePreview } from '../filePreview/MessageFilePreview.jsx';
 
 const base64ToBlob = (base64str) => {

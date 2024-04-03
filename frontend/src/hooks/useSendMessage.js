@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useConversation from "../zustand/useConversation.js";
+import { useConversation } from "../zustand/useConversation.js";
 import toast from "react-hot-toast";
 
 const useSendMessage = () => {
@@ -45,7 +45,7 @@ const useSendMessage = () => {
 
             if (userSendFile) {
                 body.userSendFile = userSendFile;
-            }else if (sendAudioFile) {
+            } else if (sendAudioFile) {
                 body.sendAudioFile = sendAudioFile;
             }
 
