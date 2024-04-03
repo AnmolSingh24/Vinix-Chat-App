@@ -13,6 +13,6 @@ export default useConversation;
 // export const useGroup = create ((set) => ({
 //     selectedGroup: null,
 //     setSelectedGroup: (selectedGroup) => set({selectedGroup}),
-//     messages: [],
-//     setMessages: (messages) => set({messages}),
+//     groups: [],
+//     setGroups: (groups) => set({groups}),
 // }));
