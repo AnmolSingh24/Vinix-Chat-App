@@ -5,8 +5,11 @@ const useSendGroup = () => {
     const [submissionMessage, setSubmissionMessage] = useState('');
 
     const sendGroupData = async (groupName, groupDescription, selectedUsers, profilePicture) => {
-        if (selectedUsers.length > 0 && groupName && groupDescription) {
+        if (selectedUsers.length > 0 && groupName && groupDescription && profilePicture) {
+
             const groupToken = document.cookie.split("=")[1];
+            const userId = JSON.parse(localStorage.getItem("chat-user"))._id;
+
             try {
                 const res = await fetch('/api/users/groups', {
                     method: 'POST',
@@ -17,7 +20,7 @@ const useSendGroup = () => {
                     body: JSON.stringify({
                         groupName: groupName,
                         groupDescription: groupDescription,
-                        members: selectedUsers,
+                        members: [...selectedUsers, userId],
                         profilePicture: profilePicture,
                     }),
                 });
@@ -30,6 +33,7 @@ const useSendGroup = () => {
                 console.log("Group created with users:", data);
                 setSubmissionMessage('Group created successfully');
                 return true;
+                
             } catch (error) {
                 toast.error(error.message);
                 console.error('Error creating group:', error.message);

@@ -3,8 +3,8 @@ import toast from 'react-hot-toast';
 import { useGroup } from '../zustand/useConversation';
 
 const useGetGroups = () => {
-    const [loading, setLoading] = useState(false);
-    const { groups, setGroups, selectedGroup } = useGroup();
+    const [loadingGroups, setLoading] = useState(false);
+    const { groups, setGroups } = useGroup();
 
     useEffect(() => {
         const getGroups = async () => {
@@ -20,7 +20,6 @@ const useGetGroups = () => {
                 });
 
                 const data = await res.json();
-                console.log({data});
                 if (data.error) throw new Error(data.error);
                 setGroups(data);
 
@@ -32,7 +31,7 @@ const useGetGroups = () => {
         }
         getGroups();
     }, []);
-    return { groups, loading };
+    return { groups, loadingGroups, setGroups };
 }
 
 export default useGetGroups;
