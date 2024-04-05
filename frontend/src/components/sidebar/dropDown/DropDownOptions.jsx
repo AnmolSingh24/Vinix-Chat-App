@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { HiDotsVertical } from "react-icons/hi";
 import AIChatBot from "../AIChatBot"
-import SelectUsers from '../group/SelectUsers';
+import CreateGroup from '../group/CreateGroup';
 
 const DropDownOptions = () => {
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-    
+
     const handleDropDown = () => {
         setIsDropDownOpen(!isDropDownOpen);
     };
@@ -20,7 +20,7 @@ const DropDownOptions = () => {
                 {isDropDownOpen && (
                     <div className="absolute -left-28 bg-white z-10 mt-2 h-20 shadow-md rounded">
                         {/* Create group */}
-                        <SelectUsers />
+                        <CreateGroup />
                         {/* AI ChatBot */}
                         <AIChatBot />
                     </div>
