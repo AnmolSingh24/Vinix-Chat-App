@@ -3,15 +3,16 @@ import toast from 'react-hot-toast';
 import { MdOutlineGroups } from 'react-icons/md';
 import useSendGroup from '../../../hooks/useSendGroup';
 import useGetConversations from '../../../hooks/useGetConversations';
+import { AiOutlineCamera } from "react-icons/ai";
 
-const SelectUsers = () => {
+const CreateGroup = () => {
     const [groupName, setGroupName] = useState('');
     const [groupDescription, setGroupDescription] = useState('');
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [showComponent, setShowComponent] = useState(false);
 
     const { conversations } = useGetConversations();
-    const { submissionMessage, sendGroupData } = useSendGroup();
+    const { sendGroupData } = useSendGroup();
 
     const handleToggleSelectUser = (userId) => {
         setSelectedUsers((prevSelectedUsers) => {
@@ -44,10 +45,17 @@ const SelectUsers = () => {
             </button>
 
             {showComponent && (
-                <div className='fixed top-0.5 bottom-40 left-[36.4rem] bg-white -translate-x-[50%] md:min-w-[450px] h-[40rem] z-50 rounded shadow-md'>
+                <div className='fixed top-0 bottom-40 left-[36.5rem] bg-white -translate-x-[50%] md:min-w-[450px] h-[40rem] z-50 rounded shadow-md'>
                     <div className='w-full p-6 bg-white'>
-                        <h1 className='text-3xl font-semibold text-center text-black'>Group Details</h1>
-                        <div className='mt-6'>
+                        <h1 className='text-3xl font-semibold text-center text-black'>Create Group</h1>
+                        <div className='mt-6 flex items-center justify-start gap-4'>
+
+                            <div className='flex items-center justify-center bg-gray-200 w-16 h-16 rounded-full'>
+                                <button >
+                                    <AiOutlineCamera className="w-10 h-10 p-2 rounded-full text-black" />
+                                </button>
+                            </div>
+
                             <div>
                                 <label className='label p-2'>
                                     <span className='text-base label-text text-black'>Group Name</span>
@@ -55,14 +63,16 @@ const SelectUsers = () => {
                                 <input
                                     type='text'
                                     name='groupName'
-                                    className='input w-full input-bordered h-10 bg-gray-50 text-black'
+                                    className='input w-80 input-bordered h-10 bg-gray-50 text-black'
                                     placeholder='Enter Group Name'
                                     autoComplete='off'
                                     value={groupName}
                                     onChange={(e) => setGroupName(e.target.value)}
                                 />
-                            </div>
-                            <div>
+                            </div>                            
+                        </div>
+
+                        <div>
                                 <label className='label p-2'>
                                     <span className='text-base label-text text-black'>Group Description</span>
                                 </label>
@@ -76,13 +86,13 @@ const SelectUsers = () => {
                                     onChange={(e) => setGroupDescription(e.target.value)}
                                 />
                             </div>
-                        </div>
                     </div>
 
                     <button className="absolute top-2 right-4 text-black" onClick={handleHideComponent}>x</button>
+                    <div className='divider px-0.5 m-0'></div>
                     <h2 className='text-black font-bold ml-[3rem] text-xl'>Select Users</h2>
 
-                    <div className="grid grid-cols-2 gap-4 mt-5 ml-10">
+                    <div className="grid grid-cols-2 gap-3 mt-5 ml-7">
                         {conversations.map((user) => (
                             <div key={user._id} className="flex items-center justify-start gap-2">
                                 <div className='form-control'>
@@ -113,4 +123,4 @@ const SelectUsers = () => {
     );
 }
 
-export default SelectUsers;
+export default CreateGroup;

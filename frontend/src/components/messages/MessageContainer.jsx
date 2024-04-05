@@ -25,14 +25,18 @@ const MessageContainer = () => {
           {/* <Header/> */}
           <div className='flex flex-col items-start justify-between bg-emerald-600 px-4 py-3.5'>
             <div className='flex items-center gap-2'>
-              <span className='label-text text-gray-100 font-semibold'>To : </span>
               <span className='text-gray-100 font-bold'>{selectedConversation.fullname}</span>
               <span className='text-gray-100 font-bold'>{selectedConversation.groupName}</span>
             </div>
 
-            <div className='flex'>
-              {selectedConversation.members && selectedConversation.members.map((m, idx) =>
-                <span key={idx} className='text-gray-100 text-base'>{m.fullname}</span>)}
+            <div className='flex gap-1 ml-2'>
+              {selectedConversation.members && selectedConversation.members.map((m, idx) => (
+                <div key={idx}>
+                  <span className='text-gray-100 text-xs'>{m.fullname}</span>
+                  {idx !== selectedConversation.members.length - 1 && idx !== selectedConversation.members.indexOf(-1) &&
+                    <span className="comma" style={{ color: 'white' }}>,</span>}
+                </div>
+              ))}
             </div>
 
             {/* <div className='flex items-center gap-6'>
