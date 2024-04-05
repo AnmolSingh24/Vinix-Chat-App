@@ -12,7 +12,7 @@ const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
 
   useEffect(() => {
-    //cleanup function (unmounts)
+    //cleanup function (unmounts)z
     return () => setSelectedConversation(null);
   }, [setSelectedConversation]);
 
@@ -23,10 +23,16 @@ const MessageContainer = () => {
       ) : (
         <>
           {/* <Header/> */}
-          <div className='flex items-start justify-between bg-emerald-600 px-4 py-3.5'>
+          <div className='flex flex-col items-start justify-between bg-emerald-600 px-4 py-3.5'>
             <div className='flex items-center gap-2'>
               <span className='label-text text-gray-100 font-semibold'>To : </span>
               <span className='text-gray-100 font-bold'>{selectedConversation.fullname}</span>
+              <span className='text-gray-100 font-bold'>{selectedConversation.groupName}</span>
+            </div>
+
+            <div className='flex'>
+              {selectedConversation.members && selectedConversation.members.map((m, idx) =>
+                <span key={idx} className='text-gray-100 text-base'>{m.fullname}</span>)}
             </div>
 
             {/* <div className='flex items-center gap-6'>

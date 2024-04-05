@@ -1,20 +1,6 @@
 import Group from "../models/group.model.js"
 import { getReceiverSocketId, io } from "../socket/socket.js";
 
-export const getGroupsForSidebar = async (req, res) => {
-    try {
-
-        const loggedInGroupId = req.user._id;
-
-        const filteredUsers = await Group.find({ _id: { $ne: loggedInGroupId } }).select("-password");
-
-        res.status(200).json(filteredUsers);
-    } catch (error) {
-        console.log("Error in getGroupsForSidebar controller: ", error.message);
-        res.status(500).json({ error: "Internal server error" });
-    }
-}
-
 export const createGroup = async (req, res) => {
     try {
         const { groupName, groupDescription, members, profilePicture } = req.body;
@@ -31,12 +17,12 @@ export const createGroup = async (req, res) => {
         });
 
         await newGroup.save();
-        
+
         members.forEach(e => {
             const receiverSocketId = getReceiverSocketId(e);
             if (receiverSocketId) {
                 //io.to(socketId).emit() used to show events to specific clients
-                io.to(receiverSocketId).emit("newGroup", newGroup.groupName);
+                io.to(receiverSocketId).emit("newGroup", newGroup);
             }
         });
         return res.status(201).json({ message: 'Group created successfully', group: newGroup });
@@ -46,3 +32,42 @@ export const createGroup = async (req, res) => {
         return res.status(500).json({ error: "Internal server error" });
     }
 }
+
+export const getGroups = async (req, res) => {
+    try {
+        const senderId = req.user._id;
+
+        const groups = await Group.find({
+            members: { $in: [senderId] }
+        }).populate("members");
+
+        if (!groups) return res.status(200).json([]);
+
+        res.status(200).json(groups);
+
+    } catch (error) {
+        console.log("Error in getGroups controller: ", error.message);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
+
+export const getGroup = async (req, res) => {
+    try {
+        const { groupId } = req.params;
+        const senderId = req.user._id;
+
+        const group = await Group.findOne({
+            members: { $all: [senderId, groupId] },
+        }).populate("members");
+
+        if (!group) return res.status(200).json([]);
+
+        const groups = group.members;
+
+        res.status(200).json(groups);
+
+    } catch (error) {
+        console.log("Error in getGroup controller: ", error.message);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
