@@ -31,6 +31,10 @@ const CreateGroup = () => {
             setShowComponent(false);
             toast.success("Group created successfully");
         }
+
+        if (groupName === "" || groupDescription === "" || selectedUsers === "") {
+            toast.error("Please fill in all fields");
+        }
     };
 
     const handleHideComponent = () => {

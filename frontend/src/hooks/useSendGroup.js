@@ -2,7 +2,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useSendGroup = () => {
-    const [submissionMessage, setSubmissionMessage] = useState('');
+    const [submissionMessage, ] = useState('');
 
     const sendGroupData = async (groupName, groupDescription, selectedUsers, profilePicture) => {
         if (selectedUsers.length > 0 && groupName && groupDescription) {
@@ -25,20 +25,12 @@ const useSendGroup = () => {
                     }),
                 });
 
-                if (!res.ok) {
-                    throw new Error('Failed to create group');
-                }
-
                 const data = await res.json();
-
                 if (data.error) throw new Error(data.error);
-
-                setSubmissionMessage('Group created successfully');
                 return true;
+
             } catch (error) {
                 toast.error(error.message);
-                console.error('Error creating group:', error.message);
-                setSubmissionMessage('Failed to create group. Please try again later.');
                 return false;
             }
         }
