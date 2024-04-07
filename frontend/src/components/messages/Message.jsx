@@ -29,10 +29,16 @@ const Message = ({ message }) => {
     const fromMe = message.senderId === authUser._id;
     const formattedTime = extractTime(message.createdAt);
     const chatClassName = fromMe ? 'chat-end' : 'chat-start';
-    const profilePicture = fromMe ? authUser.profilePicture : selectedConversation?.profilePicture;
+    let profilePicture = fromMe ? authUser.profilePicture : selectedConversation?.profilePicture;
     const bgColor = fromMe ? 'bg-emerald-600' : 'bg-emerald-800';
     const audioBlob = base64ToBlob(message.userSendVoiceNotes);
 
+    if (!fromMe) {
+        const profile = selectedConversation.members?.find((e) => e._id == message.senderId)?.profilePicture;
+        if (profile) {
+            profilePicture = profile;
+        }
+    }
     const isFile = Boolean(message.userSendFile);
 
     return (

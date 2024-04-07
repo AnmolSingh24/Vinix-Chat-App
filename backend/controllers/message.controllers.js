@@ -8,15 +8,20 @@ export const sendMessage = async (req, res) => {
         const { message, sendAudioFile, conversationId } = req.body;
         const { id: receiverId } = req.params;
         const senderId = req.user._id;
+
+        let receiver = [];
         let conversation;
+
         if (conversationId) {
             conversation = await Conversation.findOne({
                 _id: conversationId
-            })
+            });
+            receiver = conversation.participants.filter((m) => m !== senderId)
         } else {
             conversation = await Conversation.findOne({
                 participants: { $all: [senderId, receiverId] },
-            })
+            });
+            receiver = [receiverId]
         }
 
         if (!conversation) {
@@ -39,11 +44,13 @@ export const sendMessage = async (req, res) => {
 
         // SOCKET IO FUNCTIONALITY WILL GO HERE
 
-        const receiverSocketId = getReceiverSocketId(receiverId);
-        if (receiverSocketId) {
-            //io.to(socketId).emit() used to show events to specific clients
-            io.to(receiverSocketId).emit("newMessage", newMessage);
-        }
+        receiver.forEach(e => {
+            const receiverSocketId = getReceiverSocketId(e);
+            if (receiverSocketId) {
+                //io.to(socketId).emit() used to show events to specific clients
+                io.to(receiverSocketId).emit("newMessage", newMessage);
+            }
+        });
 
         return res.status(201).json(newMessage);
     } catch (error) {
@@ -61,7 +68,7 @@ export const getMessages = async (req, res) => {
         if (conversationId !== "undefined") {
             conversation = await Conversation.findOne({
                 _id: conversationId,
-            }).populate("messages");
+            }).populate("messages").populate("participants");
         } else {
             conversation = await Conversation.findOne({
                 participants: { $all: [senderId, id] },

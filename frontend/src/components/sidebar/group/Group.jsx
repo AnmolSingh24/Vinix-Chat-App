@@ -14,9 +14,9 @@ const Group = ({ group, lastIdx }) => {
                 ${isSelected ? "bg-emerald-600" : ""}`}
                 onClick={() => setSelectedConversation(group)}>
 
-                <div className='w-12 h-12 flex items-center justify-center rounded-full'>
+                <div>
                     {group?.profilePicture ?
-                        <img src={group?.profilePicture} alt="user img" /> :
+                        <img className="w-12 h-12 rounded-full" src={group?.profilePicture} alt="user img" /> :
                         <div className="w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full">
                             <MdGroups className="w-7 h-7 text-gray-500" />
                         </div>

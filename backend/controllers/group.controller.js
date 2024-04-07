@@ -3,11 +3,10 @@ import Group from "../models/group.model.js"
 import { getReceiverSocketId, io } from "../socket/socket.js";
 
 export const createGroup = async (req, res) => {
-    console.log(req.body);
     try {
         const { groupName, groupDescription, members, profilePicture } = req.body;
 
-        if (!groupName || !groupDescription || !members || members.length === 0 || profilePicture) {
+        if (!groupName || !groupDescription || !members || members.length === 0 || !profilePicture) {
             return res.status(400).json({ error: 'Invalid input data' });
         }
 

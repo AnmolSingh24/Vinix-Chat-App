@@ -9,7 +9,6 @@ const useSendGroup = () => {
 
             const groupToken = document.cookie.split("=")[1];
             const userId = JSON.parse(localStorage.getItem("chat-user"))._id;
-
             try {
                 const res = await fetch('/api/users/groups', {
                     method: 'POST',

@@ -11,7 +11,7 @@ import { ImCancelCircle } from "react-icons/im";
 
 const MessagesInput = () => {
   const [message, setMessage] = useState("");
-  const { messageLoading, sendMessage } = useSendMessage();
+  const { loading, sendMessage } = useSendMessage();
   const { loading: fileLoading, sendFiles } = useSendFiles();
   const [selectedFile, setSelectedFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
@@ -186,7 +186,7 @@ const MessagesInput = () => {
       <div className='w-96 relative flex items-center justify-between'>
         <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
         <button type='button' className='bg-emerald-500 p-2 mr-1 rounded-full' onClick={selectOptions}>
-          {messageLoading ? <div className='loading loading-spinner'></div> : <IoAttachSharp className='w-7 h-7 text-black' />}
+          {loading ? <div className='loading loading-spinner'></div> : <IoAttachSharp className='w-7 h-7 text-black' />}
         </button>
 
         <input type="file" className="hidden" ref={fileInputRef} />
@@ -211,7 +211,7 @@ const MessagesInput = () => {
         ) : (
           <div className='flex flex-1 items-center justify-center relative'>
             <button type='button' className='absolute left-1 bg-emerald-500 p-2.5 rounded-full' onClick={startRecording}>
-              {messageLoading ? <div className='loading loading-spinner'></div> : <TiMicrophoneOutline className='w-6 h-6 text-black' />}
+              {loading ? <div className='loading loading-spinner'></div> : <TiMicrophoneOutline className='w-6 h-6 text-black' />}
             </button>
           </div>
         )}

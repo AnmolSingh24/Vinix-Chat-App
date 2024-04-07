@@ -16,7 +16,7 @@ const CreateGroup = () => {
 
     const { conversations } = useGetConversations();
     const { sendGroupData } = useSendGroup();
-    const { newGroup, setNewGroup } = useListenGroup();
+    const newGroup = useListenGroup();
 
     const handleToggleSelectUser = (userId) => {
         setSelectedUsers((prevSelectedUsers) => {
