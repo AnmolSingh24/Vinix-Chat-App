@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import { MdOutlineGroups } from 'react-icons/md';
+import { MdGroups } from "react-icons/md";
 import useSendGroup from '../../../hooks/useSendGroup';
 import useGetConversations from '../../../hooks/useGetConversations';
 import { AiOutlineCamera } from "react-icons/ai";
+import useListenGroup from '../../../hooks/useListenGroup';
 
 const CreateGroup = () => {
     const [groupName, setGroupName] = useState('');
     const [groupDescription, setGroupDescription] = useState('');
     const [selectedUsers, setSelectedUsers] = useState([]);
+    const [groupImage, setGroupImage] = useState(null);
     const [showComponent, setShowComponent] = useState(false);
+    const fileInputRef = useRef(null);
 
     const { conversations } = useGetConversations();
     const { sendGroupData } = useSendGroup();
+    const { newGroup, setNewGroup } = useListenGroup();
 
     const handleToggleSelectUser = (userId) => {
         setSelectedUsers((prevSelectedUsers) => {
@@ -24,16 +28,69 @@ const CreateGroup = () => {
         });
     };
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setGroupImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleSubmit = async () => {
-        const success = await sendGroupData(groupName, groupDescription, selectedUsers);
+        const success = await sendGroupData(groupName, groupDescription, selectedUsers, groupImage);
 
         if (success) {
             setShowComponent(false);
             toast.success("Group created successfully");
+            notifyUsers(groupName, selectedUsers);
         }
 
-        if (groupName === "" || groupDescription === "" || selectedUsers === "") {
+        if (groupName === "" || groupDescription === "" || selectedUsers.length === 0) {
             toast.error("Please fill in all fields");
+        }
+    };
+
+    const notifyUsers = (groupName, selectedUsers) => {
+        {newGroup &&
+            // Here you can implement the logic to send a notification to each selected user
+            //toast.success('notification', { userId, message: `You have been added to the group: ${groupName}` });
+            toast.custom((t) => (
+                <div
+                    className={`${t.visible ? 'animate-enter' : 'animate-leave'
+                        } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+                >
+                    <div className="flex-1 w-0 p-4">
+                        <div className="flex items-start">
+                            <div className="flex-shrink-0 pt-0.5">
+                                <img
+                                    className="h-10 w-10 rounded-full"
+                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=6GHAjsWpt9&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+                                    alt=""
+                                />
+                            </div>
+                            <div className="ml-3 flex-1">
+                                <p className="text-sm font-medium text-gray-900">
+                                    Emilia Gates
+                                </p>
+                                <p className="mt-1 text-sm text-gray-500">
+                                    You have been added to the group: ${groupName}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex border-l border-gray-200">
+                        <button
+                            onClick={() => toast.dismiss(t.id)}
+                            className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            ))
         }
     };
 
@@ -44,7 +101,7 @@ const CreateGroup = () => {
     return (
         <>
             <button type='submit' className="text-black pt-2.5 w-40 flex items-center justify-center gap-2" onClick={() => setShowComponent(true)}>
-                <MdOutlineGroups className="w-6 h-6 text-black" />
+                <MdGroups className="w-6 h-6 text-black" />
                 Create Group
             </button>
 
@@ -55,8 +112,19 @@ const CreateGroup = () => {
                         <div className='mt-6 flex items-center justify-start gap-4'>
 
                             <div className='flex items-center justify-center bg-gray-200 w-16 h-16 rounded-full'>
-                                <button >
-                                    <AiOutlineCamera className="w-10 h-10 p-2 rounded-full text-black" />
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    ref={fileInputRef}
+                                    style={{ display: 'none' }}
+                                    onChange={handleImageChange}
+                                />
+                                <button onClick={() => fileInputRef.current.click()}>
+                                    {groupImage ? (
+                                        <img src={groupImage} alt="Group" className="w-16 h-16 rounded-full" />
+                                    ) : (
+                                        <AiOutlineCamera className="w-10 h-10 p-2 rounded-full text-black" />
+                                    )}
                                 </button>
                             </div>
 
@@ -73,23 +141,23 @@ const CreateGroup = () => {
                                     value={groupName}
                                     onChange={(e) => setGroupName(e.target.value)}
                                 />
-                            </div>                            
+                            </div>
                         </div>
 
                         <div>
-                                <label className='label p-2'>
-                                    <span className='text-base label-text text-black'>Group Description</span>
-                                </label>
-                                <input
-                                    type='text'
-                                    name='groupDescription'
-                                    className='input w-full input-bordered h-10 bg-gray-50 text-black'
-                                    placeholder='Enter Group Description'
-                                    autoComplete='off'
-                                    value={groupDescription}
-                                    onChange={(e) => setGroupDescription(e.target.value)}
-                                />
-                            </div>
+                            <label className='label p-2'>
+                                <span className='text-base label-text text-black'>Group Description</span>
+                            </label>
+                            <input
+                                type='text'
+                                name='groupDescription'
+                                className='input w-full input-bordered h-10 bg-gray-50 text-black'
+                                placeholder='Enter Group Description'
+                                autoComplete='off'
+                                value={groupDescription}
+                                onChange={(e) => setGroupDescription(e.target.value)}
+                            />
+                        </div>
                     </div>
 
                     <button className="absolute top-2 right-4 text-black" onClick={handleHideComponent}>x</button>

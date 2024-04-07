@@ -7,15 +7,16 @@ const useListenGroup = () => {
     const [ newGroup, setNewGroup ] = useState();
 
     useEffect(() => {
-        socket?.on("newGroup", (newGroup) => {
+        if (!socket) return;
+        socket.on("newGroup", (newGroup) => {
             const sound = new Audio(notificationSound);
             sound.play();
             setNewGroup(newGroup);
         });
-        return () => socket?.off("newGroup")
+        return () => socket.off("newGroup")
 
     }, [socket, setNewGroup])
-    return newGroup;
+    return {newGroup, setNewGroup};
 
 }
 

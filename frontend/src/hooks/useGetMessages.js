@@ -11,7 +11,7 @@ const useGetMessages = () => {
       const storedToken = document.cookie.split("=")[1];
       setLoading(true);
       try {
-        const res = await fetch(`/api/messages/${selectedConversation._id}`, {
+        const res = await fetch(`/api/messages/${selectedConversation._id}/conversation/${selectedConversation.conversation}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

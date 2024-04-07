@@ -5,13 +5,19 @@ import { getReceiverSocketId, io } from "../socket/socket.js";
 export const sendMessage = async (req, res) => {
     try {
         const { userSendFile } = req.body;
-        const { message, sendAudioFile } = req.body;
+        const { message, sendAudioFile, conversationId } = req.body;
         const { id: receiverId } = req.params;
         const senderId = req.user._id;
-
-        let conversation = await Conversation.findOne({
-            participants: { $all: [senderId, receiverId] },
-        });
+        let conversation;
+        if (conversationId) {
+            conversation = await Conversation.findOne({
+                _id: conversationId
+            })
+        } else {
+            conversation = await Conversation.findOne({
+                participants: { $all: [senderId, receiverId] },
+            })
+        }
 
         if (!conversation) {
             conversation = await Conversation.create({
@@ -48,12 +54,19 @@ export const sendMessage = async (req, res) => {
 
 export const getMessages = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id, conversationId } = req.params;
         const senderId = req.user._id;
 
-        const conversation = await Conversation.findOne({
-            participants: { $all: [senderId, id] },
-        }).populate("messages");
+        let conversation;
+        if (conversationId !== "undefined") {
+            conversation = await Conversation.findOne({
+                _id: conversationId,
+            }).populate("messages");
+        } else {
+            conversation = await Conversation.findOne({
+                participants: { $all: [senderId, id] },
+            }).populate("messages");
+        }
 
         if (!conversation) return res.status(200).json([]);
 

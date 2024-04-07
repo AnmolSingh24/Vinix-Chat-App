@@ -1,3 +1,4 @@
+import { MdGroups } from "react-icons/md";
 import { useConversation, useGroup } from "../../../zustand/useConversation";
 
 const Group = ({ group, lastIdx }) => {
@@ -13,10 +14,13 @@ const Group = ({ group, lastIdx }) => {
                 ${isSelected ? "bg-emerald-600" : ""}`}
                 onClick={() => setSelectedConversation(group)}>
 
-                <div>
-                    <div className='w-12 rounded-full'>
-                        <img src={group?.profilePicture} alt="user img" />
-                    </div>
+                <div className='w-12 h-12 flex items-center justify-center rounded-full'>
+                    {group?.profilePicture ?
+                        <img src={group?.profilePicture} alt="user img" /> :
+                        <div className="w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full">
+                            <MdGroups className="w-7 h-7 text-gray-500" />
+                        </div>
+                    }
                 </div>
 
                 <div className='flex flex-col flex-1'>

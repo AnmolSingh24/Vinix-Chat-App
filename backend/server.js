@@ -11,9 +11,10 @@ import bodyParser from "body-parser"
 const PORT = process.env.PORT || 5000;
 dotenv.config();
 
-app.use(express.json()); //to parse the incoming requests with JSON payloads (from req.body)
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(bodyParser.text({ limit: '200mb' }));
 
-app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);

@@ -1,7 +1,9 @@
+import Conversation from "../models/conversation.model.js";
 import Group from "../models/group.model.js"
 import { getReceiverSocketId, io } from "../socket/socket.js";
 
 export const createGroup = async (req, res) => {
+    console.log(req.body);
     try {
         const { groupName, groupDescription, members, profilePicture } = req.body;
 
@@ -9,13 +11,17 @@ export const createGroup = async (req, res) => {
             return res.status(400).json({ error: 'Invalid input data' });
         }
 
+        const conversation = await Conversation.create({
+            participants: members,
+        });
+
         const newGroup = new Group({
             groupName,
             groupDescription,
             members,
             profilePicture,
+            conversation: conversation._id
         });
-
         await newGroup.save();
 
         members.forEach(e => {

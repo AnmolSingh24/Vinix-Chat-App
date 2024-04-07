@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 const Conversations = () => {
   const { loading, conversations } = useGetConversations();
   const { loadingGroups, groups, setGroups } = useGetGroups();
-  const newGroup = useListenGroup();
+  const { newGroup } = useListenGroup();
 
   useEffect(() => {
     setGroups([...groups, newGroup]);

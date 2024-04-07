@@ -33,7 +33,7 @@ const useSendMessage = () => {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${sendMessageToken}`
                 },
-                body: JSON.stringify({ message, userSendFile, sendAudioFile }),
+                body: JSON.stringify({ message, userSendFile, sendAudioFile, conversationId: selectedConversation?.conversation }),
             });
 
             const data = await res.json();

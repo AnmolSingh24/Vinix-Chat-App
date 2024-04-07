@@ -17,7 +17,12 @@ const groupSchema = new mongoose.Schema({
     ],
     profilePicture: {
         type: String,
+        size: String,
         default: ""
+    },
+    conversation: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Conversation"
     }
 }, { timestamps: true });
 

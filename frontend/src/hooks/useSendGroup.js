@@ -2,11 +2,11 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useSendGroup = () => {
-    const [submissionMessage, ] = useState('');
+    const [submissionMessage] = useState('');
 
-    const sendGroupData = async (groupName, groupDescription, selectedUsers, profilePicture) => {
+    const sendGroupData = async (groupName, groupDescription, selectedUsers, profilePic) => {
         if (selectedUsers.length > 0 && groupName && groupDescription) {
-            
+
             const groupToken = document.cookie.split("=")[1];
             const userId = JSON.parse(localStorage.getItem("chat-user"))._id;
 
@@ -21,11 +21,12 @@ const useSendGroup = () => {
                         groupName: groupName,
                         groupDescription: groupDescription,
                         members: [...selectedUsers, userId],
-                        profilePicture: profilePicture,
+                        profilePicture: profilePic,
                     }),
                 });
 
                 const data = await res.json();
+
                 if (data.error) throw new Error(data.error);
                 return true;
 
