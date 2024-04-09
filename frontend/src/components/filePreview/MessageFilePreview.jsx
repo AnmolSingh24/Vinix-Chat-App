@@ -54,7 +54,7 @@ export const MessageFilePreview = ({ fileName, file }) => {
                 <img className='h-12 w-12' src={icon} alt={`${fileType} Icon`} />
                 <div className="flex gap-2">
                     <p className='text-sm pl-2 mb-1'>{fileName}</p>
-                    <a href={file} className='pr-2'>
+                    <a href={file} download={fileName} className='pr-2'>
                         <PiDownloadSimple className='w-5 h-5' />
                     </a>
                 </div>

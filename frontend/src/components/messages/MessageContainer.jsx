@@ -3,8 +3,6 @@ import { useConversation } from '../../zustand/useConversation.js';
 import Messages from './Messages'
 import MessagesInput from './MessagesInput'
 import { TiMessages } from "react-icons/ti";
-// import { FaVideo } from "react-icons/fa";
-// import { IoMdCall } from "react-icons/io";
 import { useAuthContext } from '../../context/AuthContext';
 
 const MessageContainer = () => {
@@ -23,23 +21,28 @@ const MessageContainer = () => {
       ) : (
         <>
           {/* <Header/> */}
-          <div className='flex flex-col items-start justify-between bg-emerald-600 px-4 py-3.5'>
+          <div className='flex flex-col items-start bg-emerald-600 px-4 py-2.5'>
             <div className='flex items-center gap-2'>
-              <span className='text-gray-100 font-bold'>{selectedConversation.fullname}</span>
-              <span className='text-gray-100 font-bold'>{selectedConversation.groupName}</span>
+              <img src={selectedConversation.profilePicture} alt="profile picture" className='w-10 h-10 rounded-full' />
+              <div>
+                <span className='text-gray-100 font-bold'>{selectedConversation.fullname}</span>
+                {selectedConversation.groupName && (
+                  <span className='text-gray-100 font-bold'>{selectedConversation.groupName}</span>
+                )}
+              </div>
             </div>
 
-            <div className='flex gap-1 ml-2'>
-              {selectedConversation.members && selectedConversation.members.map((m, idx) => (
-                <div key={idx}>
-                  <span className='text-gray-100 text-xs'>{m.fullname}</span>
-                  {idx !== selectedConversation.members.length - 1 && idx !== selectedConversation.members.indexOf(-1) &&
-                    <span className="comma" style={{ color: 'white' }}>,</span>}
+            {selectedConversation.members && selectedConversation.members.length > 0 && (
+              <div className='-mt-2.5 ml-12'>
+                <div className='flex flex-wrap gap-1'>
+                  {selectedConversation.members.map((m, idx) => (
+                    <span key={idx} className='text-gray-100 text-xs'>{m.fullname}{idx !== selectedConversation.members.length - 1 ? ',' : ''}</span>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
 
-            {/* <div className='flex items-center gap-6'>
+            {/* <div className='flex items-center gap-6 mt-3'>
               <button>
                 <FaVideo className='w-5 h-5 text-white' />
               </button>

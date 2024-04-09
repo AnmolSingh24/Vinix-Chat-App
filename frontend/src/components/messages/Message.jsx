@@ -60,7 +60,7 @@ const Message = ({ message }) => {
                 )} {!message.userSendFile && (
                     message.message
                 )} {message.userSendVoiceNotes &&
-                    <audio controls>
+                    <audio controls className='w-52'>
                         <source src={URL.createObjectURL(audioBlob)} type="audio/wav" />
                     </audio>
                 }
