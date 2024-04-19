@@ -103,7 +103,7 @@ const Signup = () => {
 
   const validateInputs = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])(?!.*\s).{6,20}$/;
 
     if (!inputs.fullname.trim()) {
       toast.error('Fullname is required');
@@ -124,7 +124,7 @@ const Signup = () => {
       toast.error('Password is required');
       return false;
     } else if (!passwordRegex.test(inputs.password)) {
-      toast.error('Password must be at least 6 characters long and contain at least one digit, one lowercase letter, and one uppercase letter');
+      toast.error('Password must be at least 6 characters long and contain at least one digit, one lowercase letter, one uppercase letter, and one special character');
       return false;
     }
     if (inputs.password !== inputs.confirmPassword) {
