@@ -178,8 +178,8 @@ const MessagesInput = () => {
 
       {/* Clicked Image Preview */}
       {filePreview && (
-        <div className="-mt-5 absolute top-20">
-          <img src={filePreview} alt="Preview" className="w-[26.5rem] h-[26.5rem]" />
+        <div className="mt-5 absolute top-28">
+          <img src={filePreview} alt="Preview" className="w-[26.5rem] h-[20rem]" />
         </div>
       )}
 
