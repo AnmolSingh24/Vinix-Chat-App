@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { AiOutlineCamera } from "react-icons/ai";
+//import { AiOutlineCamera } from "react-icons/ai";
 import { IoAttachSharp } from "react-icons/io5";
 import { TbSend } from "react-icons/tb";
 import { TiMicrophoneOutline } from "react-icons/ti";
 import useSendMessage from '../../hooks/useSendMessage';
 import toast from 'react-hot-toast';
 import useSendFiles from '../../hooks/useSendFiles';
-import { TbCaptureFilled } from "react-icons/tb";
-import { ImCancelCircle } from "react-icons/im";
+// import { TbCaptureFilled } from "react-icons/tb";
+// import { ImCancelCircle } from "react-icons/im";
 
 const MessagesInput = () => {
   const [message, setMessage] = useState("");
@@ -17,10 +17,10 @@ const MessagesInput = () => {
   const [filePreview, setFilePreview] = useState(null);
   const fileInputRef = useRef(null);
   const [showOptions, setshowOptions] = useState(false);
-  const videoRef = useRef(null);
+  //const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const [mediaStream, setMediaStream] = useState(null);
-  const [showCameraModal, setShowCameraModal] = useState(false);
+  //const [mediaStream, setMediaStream] = useState(null);
+  //const [showCameraModal, setShowCameraModal] = useState(false);
   const [recording, setRecording] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [audio, setAudio] = useState(null);
@@ -54,52 +54,57 @@ const MessagesInput = () => {
 
   }, []);
 
-  const selectOptions = () => {
-    setshowOptions(true);
-  };
+  // const selectOptions = () => {
+  //   setshowOptions(true);
+  // };
 
-  const closeSelectOptions = () => {
-    setshowOptions(false);
-  };
+  // const closeSelectOptions = () => {
+  //   setshowOptions(false);
+  // };
 
-  useEffect(() => {
-    if (mediaStream) {
-      videoRef.current.srcObject = mediaStream;
-    }
-  }, [mediaStream]);
+  // useEffect(() => {
+  //   if (mediaStream) {
+  //     videoRef.current.srcObject = mediaStream;
+  //   }
+  // }, [mediaStream]);
 
-  const openCameraModal = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      setMediaStream(stream);
-      setShowCameraModal(true);
-    } catch (error) {
-      console.error('Error accessing camera:', error);
-      toast.error('Failed to access camera.');
-    }
-  };
+  // const openCameraModal = async () => {
+  //   try {
+  //     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+  //     setMediaStream(stream);
+  //     setShowCameraModal(true);
+  //   } catch (error) {
+  //     console.error('Error accessing camera:', error);
+  //     toast.error('Failed to access camera.');
+  //   }
+  // };
 
-  const closeCameraModal = () => {
-    if (mediaStream) {
-      mediaStream.getTracks().forEach(track => track.stop());
-      setMediaStream(null);
-    }
-    setShowCameraModal(false);
-  };
+  // const closeCameraModal = () => {
+  //   if (mediaStream) {
+  //     mediaStream.getTracks().forEach(track => track.stop());
+  //     setMediaStream(null);
+  //   }
+  //   setShowCameraModal(false);
+  // };
 
-  const handleCameraCapture = () => {
-    if (videoRef.current) {
-      const canvas = canvasRef.current;
-      const context = canvas.getContext('2d');
-      canvas.width = videoRef.current.videoWidth;
-      canvas.height = videoRef.current.videoHeight;
-      context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-      const imageDataUrl = canvas.toDataURL('image/png');
-      setFilePreview(imageDataUrl);
-      closeCameraModal();
-      // Automatically close showOptions when image is captured
-      setshowOptions(false);
-    }
+  // const handleCameraCapture = () => {
+  //   if (videoRef.current) {
+  //     const canvas = canvasRef.current;
+  //     const context = canvas.getContext('2d');
+  //     canvas.width = videoRef.current.videoWidth;
+  //     canvas.height = videoRef.current.videoHeight;
+  //     context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+  //     const imageDataUrl = canvas.toDataURL('image/png');
+  //     setFilePreview(imageDataUrl);
+  //     closeCameraModal();
+  //     // Automatically close showOptions when image is captured
+  //     setshowOptions(false);
+  //   }
+  // };
+
+  const handleFileIconClick = () => {
+    // Trigger click event of file input
+    fileInputRef.current.click();
   };
 
   const handleSubmit = async (e) => {
@@ -185,7 +190,7 @@ const MessagesInput = () => {
 
       <div className='w-96 relative flex items-center justify-between'>
         <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
-        <button type='button' className='bg-emerald-500 p-2 mr-1 rounded-full' onClick={selectOptions}>
+        <button type='button' className='bg-emerald-500 p-2 mr-1 rounded-full' onClick={handleFileIconClick}>
           {loading ? <div className='loading loading-spinner'></div> : <IoAttachSharp className='w-7 h-7 text-black' />}
         </button>
 
@@ -218,7 +223,7 @@ const MessagesInput = () => {
 
       </div>
 
-      {showOptions && (
+      {/* {showOptions && (
         <div className="fixed w-26 h-20 bottom-16 rounded-lg flex items-center justify-center gap-2 bg-gray-50 z-50">
           <span className='absolute top-0 right-0 mr-2 text-black cursor-pointer' onClick={closeSelectOptions}>x</span>
 
@@ -253,7 +258,7 @@ const MessagesInput = () => {
             <ImCancelCircle className='w-6 h-6' />
           </button>
         </div>
-      )}
+      )} */}
 
     </form>
   )
