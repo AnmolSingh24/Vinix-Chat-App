@@ -24,9 +24,9 @@ const MessageContainer = () => {
         <>
           {/* <Header/> */}
           <div className='flex items-center bg-emerald-600 px-4 py-2.5'>
-            <div className='flex items-center gap-2'>
+            <div className='flex flex-col items-center gap-2'>
               <img src={selectedConversation.profilePicture} alt="profile picture" className='w-10 h-10 rounded-full' />
-              <div className='flex flex-col'>
+              <div>
                 <span className='text-gray-100 font-bold'>{selectedConversation.fullname}</span>
                 {selectedConversation.groupName && (
                   <span className='text-gray-100 font-bold'>{selectedConversation.groupName}</span>
