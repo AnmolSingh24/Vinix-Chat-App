@@ -36,7 +36,7 @@ const MessageContainer = () => {
 
             {selectedConversation.members && selectedConversation.members.length > 0 && (
               <div className='flex ml-4'>
-                <div className='flex flex-col flex-wrap gap-1'>
+                <div className='flex flex-wrap gap-1'>
                   {selectedConversation.members.map((m, idx) => (
                     <span key={idx} className='text-gray-100 text-xs'>{m.fullname}{idx !== selectedConversation.members.length - 1 ? ',' : ''}</span>
                   ))}
