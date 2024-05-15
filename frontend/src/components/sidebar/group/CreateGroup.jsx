@@ -106,7 +106,7 @@ const CreateGroup = () => {
             </button>
 
             {showComponent && (
-                <div className='fixed top-0 bottom-40 pr-10 left-[36.5rem] bg-white -translate-x-[50%] md:min-w-[450px] h-[40rem] z-50 rounded shadow-md'>
+                <div className='fixed top-0 bottom-40 left-[36.5rem] bg-white -translate-x-[50%] md:min-w-[450px] h-[40rem] z-50 rounded shadow-md'>
                     <div className='w-full p-6 bg-white'>
                         <h1 className='text-3xl font-semibold text-center text-black'>Create Group</h1>
                         <div className='mt-6 flex items-center justify-start gap-4'>
