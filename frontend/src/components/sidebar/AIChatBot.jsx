@@ -28,7 +28,7 @@ const AISearch = () => {
   };
 
   const processUserMessage = async (userMessage) => {
-    const API_KEY = 'AIzaSyBBWHq1VljK2JvAtvYyL-l_0OWzShowlEE';
+    const API_KEY = 'AIzaSyB_YeERKvIzLg7DOsk35xlQNxchAOTrTyg';
 
     const genAI = new GoogleGenerativeAI(API_KEY);
     if (!userMessage || userMessage.length === 0) return;
